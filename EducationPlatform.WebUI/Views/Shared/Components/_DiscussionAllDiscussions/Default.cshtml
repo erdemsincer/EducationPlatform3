@@ -1,0 +1,48 @@
+﻿@model List<ResultDiscussionDto>
+
+<div class="col-lg-8 mb-5 mb-lg-0">
+    <div class="blog_left_sidebar">
+        @foreach (var item in Model)
+        {
+            <article class="blog_item p-4 border rounded-3 shadow-sm bg-white">
+                <!-- Tarih Gösterimi -->
+                <div class="blog_item_date_noimage text-center bg-primary text-white py-2 rounded">
+                    <h3 class="mb-0 fw-bold">@item.CreatedAt.ToString("dd")</h3>
+                    <p class="mb-0">@item.CreatedAt.ToString("MMM yyyy")</p>
+                </div>
+
+                <!-- Tartışma Detayları -->
+                <div class="blog_details mt-3">
+                    <a class="d-inline-block" href="/Discussion/Detail/@item.Id">
+                        <h3 class="blog-head fw-bold text-dark">@item.Title</h3>
+                    </a>
+                    <p class="text-muted">
+                        @if (item.Content.Length > 100)
+                        {
+                            @($"{item.Content.Substring(0, 100)}... ")
+                            <a href="/Discussion/Detail/@item.Id" class="text-primary fw-bold">Devamını Oku</a>
+                        }
+                        else
+                        {
+                            @item.Content
+                        }
+                    </p>
+
+                    <!-- Kullanıcı ve Yorum Sayısı -->
+                    <ul class="blog-info-link list-inline text-muted small">
+                        <li class="list-inline-item"><i class="fa fa-user text-primary"></i> @item.UserFullName</li>
+                        <li class="list-inline-item"><i class="fa fa-comments text-secondary"></i> @item.ReplyCount Yorum</li>
+                    </ul>
+
+                    <!-- Buton -->
+                    <div class="text-end mt-3">
+                        <a href="/Discussion/Detail/@item.Id" class="btn btn-outline-primary btn-sm fw-bold px-3 py-2 rounded-pill shadow-sm">
+                            <i class="fas fa-comments"></i> Tartışmayı Gör
+                        </a>
+                    </div>
+                </div>
+            </article>
+            <hr class="my-4">
+        }
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Kariyer Rehberi";
+    Layout = "~/Views/UILayout/Layout.cshtml";
+}
+
+<div class="container py-4">
+    <div class="text-center mb-4">
+        <h3 class="text-primary font-weight-bold">🔍 Yapay Zeka Destekli Kariyer Rehberi</h3>
+        <p class="lead text-muted">
+            Yapay zeka destekli sistemimizle **en uygun kariyer seçeneklerini** keşfedin.
+        </p>
+    </div>
+
+    <div class="row">
+        <!-- Sol taraf: Bilgilendirme -->
+        <div class="col-md-6">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <h4 class="text-center text-primary">💡 Nasıl Çalışır?</h4>
+                    <p class="text-muted">
+                        Yapay zeka, **kariyer testine verdiğiniz cevapları** analiz ederek
+                        size en uygun kariyer önerilerini sunar.
+                    </p>
+                    <ul class="list-group">
+                        <li class="list-group-item">📌 Hangi meslekler size daha uygun?</li>
+                        <li class="list-group-item">📌 Hangi becerileri geliştirmeniz gerekiyor?</li>
+                        <li class="list-group-item">📌 Yapay zeka gelecekte hangi işleri değiştirecek?</li>
+                    </ul>
+
+                    <div class="text-center mt-3">
+                        <a href="/CareerTest" class="btn btn-outline-primary">
+                            📋 Kariyer Testini Çöz
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ taraf: Kariyer Önerisi Butonu ve Sonuç -->
+        <div class="col-md-6">
+            <div class="card shadow border-0">
+                <div class="card-body text-center">
+                    <h4 class="text-primary">🔎 Kariyer Önerisi Alın</h4>
+                    <p class="text-muted">Kariyer testine verdiğiniz cevaplara göre **kişisel kariyer önerinizi** alın!</p>
+
+                    <form method="get" action="/CareerTest/GetCareerAdviceFromTest" id="careerForm">
+                        <input type="hidden" name="userId" value="@Context.Session.GetString("UserId")" />
+                        <button type="submit" id="careerButton" class="btn btn-lg btn-success">
+                            🚀 Öneri Al
+                        </button>
+                    </form>
+
+                    <!-- Yükleniyor Animasyonu -->
+                    <div id="loadingSpinner" class="text-center mt-3" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Öneri alınıyor...</span>
+                        </div>
+                        <p class="text-muted mt-2">Lütfen bekleyin, kariyer öneriniz hazırlanıyor...</p>
+                    </div>
+
+                    <h5 class="mt-4 text-primary">📌 Önerilen Kariyer:</h5>
+                    <div class="alert alert-info mt-3" style="white-space: pre-line; font-weight: bold;">
+                        @if (TempData["CareerAdvice"] != null)
+                        {
+                            @TempData["CareerAdvice"]
+                        }
+                        else
+                        {
+                            <span>🔍 Henüz bir öneri yok. Lütfen testi çözüp öneri alın!</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Butona Basınca Yükleniyor Animasyonu -->
+<script>
+    document.getElementById("careerForm").addEventListener("submit", function () {
+        document.getElementById("careerButton").disabled = true;
+        document.getElementById("careerButton").innerText = "Bekleyin...";
+        document.getElementById("loadingSpinner").style.display = "block";
+    });
+</script>
