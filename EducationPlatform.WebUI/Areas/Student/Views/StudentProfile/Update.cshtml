@@ -1,0 +1,33 @@
+﻿@model UpdateUserDto
+@{
+    ViewData["Title"] = "Profil Güncelle";
+    Layout = "~/Areas/Student/Views/StudentLayout/Index.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Profil Bilgilerimi Güncelle</h2>
+
+
+
+    <form method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label>Ad Soyad</label>
+            <input asp-for="FullName" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input asp-for="Email" type="email" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>Profil Fotoğrafı (URL)</label>
+            <input asp-for="ProfileImage" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Güncelle</button>
+        <a href="/Student/StudentProfile/Index" class="btn btn-secondary mt-3">Vazgeç</a>
+    </form>
+</div>
