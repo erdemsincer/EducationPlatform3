@@ -1,0 +1,47 @@
+﻿@model List<ResultDiscussionDto>
+
+@{
+    ViewData["Title"] = "Tartışmalar";
+    Layout = "~/Areas/Student/Views/StudentLayout/Index.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Tartışmalar</h2>
+
+    <!-- ✅ Butonlar -->
+    <div class="d-flex mb-4">
+        <a href="/Student/StudentDiscussion/MyDiscussions" class="btn btn-primary me-2">Benim Tartışmalarım</a>
+        <a href="/Student/StudentDiscussion/CreateDiscussion" class="btn btn-success">Yeni Tartışma Oluştur</a>
+    </div>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Başlık</th>
+                <th>İçerik</th>
+                <th>Oluşturan</th>
+                <th>Oluşturulma Tarihi</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Content</td>
+                    <td>@item.UserFullName</td>
+                    <td>@item.CreatedAt.ToString("dd.MM.yyyy")</td>
+                    <td>
+                        <a href="/Student/StudentDiscussionReply/Detail/@item.Id" class="btn btn-info btn-sm">Detaylar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
