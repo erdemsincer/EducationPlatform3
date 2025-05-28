@@ -1,50 +1,82 @@
 ﻿@model List<ResultDiscussionDto>
 
+<style>
+    .home-blog-single {
+        transition: all 0.3s ease;
+        border-radius: 16px;
+    }
+
+    .home-blog-single:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .home-blog-single h4 a:hover {
+        color: #1cc88a;
+        text-decoration: underline;
+    }
+
+    .home-blog-single .text-muted {
+        font-size: 0.9rem;
+    }
+
+    .btn-outline-primary {
+        border-width: 2px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #0d6efd;
+        color: #fff;
+    }
+</style>
+
 <div class="home-blog-area section-padding30">
     <div class="container">
-        <!-- Bölüm Başlığı -->
+        <!-- Başlık -->
         <div class="row">
             <div class="col-lg-12">
-                <div class="section-tittle text-center mb-50">
-                    <span class="text-primary">📢 En Yeni Tartışmalar</span>
-                    <h2 class="fw-bold">Gündemdeki Tartışmalara Katılın</h2>
+                <div class="section-tittle text-center mb-5">
+                    <span class="text-primary fs-5">📢 En Yeni Tartışmalar</span>
+                    <h2 class="fw-bold text-dark">Gündemdeki Tartışmalara Katılın</h2>
                 </div>
             </div>
         </div>
 
+        <!-- Tartışma Kartları -->
         <div class="row">
             @foreach (var item in Model)
             {
                 <div class="col-xl-6 col-lg-6 col-md-6">
-                    <div class="home-blog-single mb-4 p-4 border rounded-3 shadow-sm bg-white">
-                        <!-- Tartışma Başlığı -->
-                        <h4 class="fw-bold">
-                            <a href="/Discussion/Detail/@item.Id" class="text-dark text-decoration-none">@item.Title</a>
+                    <div class="home-blog-single mb-4 p-4 border shadow-sm bg-white">
+                        <h4 class="fw-bold mb-2">
+                            <a href="/Discussion/Detail/@item.Id" class="text-dark text-decoration-none">
+                                @item.Title
+                            </a>
                         </h4>
 
-                        <!-- Kullanıcı ve Tarih Bilgisi -->
                         <p class="text-muted small mb-2">
-                            <i class="fas fa-user text-primary"></i> @item.UserFullName |
-                            <i class="fas fa-calendar-alt text-secondary"></i> @item.CreatedAt.ToString("dd MMM yyyy")
+                            <i class="fas fa-user text-primary me-1"></i>@item.UserFullName |
+                            <i class="fas fa-calendar-alt text-secondary me-1"></i>@item.CreatedAt.ToString("dd MMM yyyy")
                         </p>
 
-                        <!-- Tartışma İçeriği (Kısa Versiyon) -->
-                        <p class="text-muted">@(item.Content.Length > 80 ? item.Content.Substring(0, 80) + "..." : item.Content)</p>
+                        <p class="text-muted">
+                            @(item.Content.Length > 80 ? item.Content.Substring(0, 80) + "..." : item.Content)
+                        </p>
 
-                        <!-- Detay Butonu -->
-                        <a href="Discussion/Detail/@item.Id" class="btn btn-outline-primary btn-sm fw-bold px-3 py-2 rounded-pill shadow-sm">
-                            <i class="fas fa-comments"></i> Tartışmaya Katıl
+                        <a href="@Url.Action("Detail", "Discussion", new { id = item.Id })" class="btn btn-outline-primary btn-sm fw-bold px-3 py-2 rounded-pill shadow-sm">
+                            <i class="fas fa-comments me-1"></i>Tartışmaya Katıl
                         </a>
                     </div>
                 </div>
             }
         </div>
 
-        <!-- Daha Fazla Tartışma Butonu -->
+        <!-- Tüm Tartışmalar Butonu -->
         <div class="row">
             <div class="col-lg-12 text-center mt-4">
                 <a href="/Discussion/Index" class="btn btn-lg btn-primary fw-bold px-4 py-3 rounded-pill shadow">
-                    <i class="fas fa-search"></i> Tüm Tartışmalara Göz At
+                    <i class="fas fa-search me-1"></i>Tüm Tartışmalara Göz At
                 </a>
             </div>
         </div>
