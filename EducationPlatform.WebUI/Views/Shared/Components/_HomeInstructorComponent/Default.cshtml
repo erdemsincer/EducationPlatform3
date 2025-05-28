@@ -35,9 +35,11 @@
                             <p><strong>Average Rating:</strong>  ⭐</p>
 
                             <!-- Eğitmene yorum yapma butonu -->
-                            <a href="@Url.Action("AddReview", "Instructor", new { instructorId = instructor.Id })" class="btn btn-primary">
+                            <a href="@Url.Action("InstructorDetails", "Instructor", new { instructorId = instructor.Id })" class="btn btn-primary">
                                 Değerlendirme Yap
                             </a>
+
+
                         </div>
                     </div>
                 </div>
