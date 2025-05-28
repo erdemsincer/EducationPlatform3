@@ -1,40 +1,81 @@
 ﻿@model List<ResultCategoryDto>
 
+<style>
+    .single-cat {
+        transition: all 0.3s ease-in-out;
+        border-radius: 16px;
+    }
+
+    .single-cat:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .cat-icon span {
+        font-size: 2.5rem;
+        color: #4e73df;
+        transition: color 0.3s ease;
+    }
+
+    .single-cat:hover .cat-icon span {
+        color: #1cc88a;
+    }
+
+    .custom-btn-outline {
+        border: 2px solid #4e73df;
+        color: #4e73df;
+        padding: 12px 28px;
+        font-weight: 600;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        background-color: transparent;
+    }
+
+    .custom-btn-outline:hover {
+        background-color: #4e73df;
+        color: #fff;
+        text-decoration: none;
+    }
+</style>
+
 <div class="categories-area section-padding30">
     <div class="container">
+        <!-- Başlık -->
         <div class="row justify-content-sm-center">
             <div class="col-xl-7 col-lg-8 col-md-10">
-                <!-- Section Başlığı -->
                 <div class="section-tittle text-center mb-70">
-                    <span>Popüler Kategoriler</span>
-                    <h2>Tüm Kategorilere Göz At</h2>
+                    <span class="text-uppercase text-primary">Popüler Kategoriler</span>
+                    <h2 class="fw-bold text-dark">Tüm Kategorilere Göz At</h2>
                 </div>
             </div>
         </div>
+
+        <!-- Kategoriler -->
         <div class="row">
-            @foreach (var category in Model)
+            @foreach (var category in Model.Take(6))
             {
                 <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-cat mb-50 p-4 border rounded-3 shadow-sm text-center bg-white">
-                        <div class="cat-icon">
-                            <span class="flaticon-education"></span> <!-- Sabit ikon veya kategoriye özel ikon eklenebilir -->
+                    <div class="single-cat mb-50 p-4 border shadow-sm text-center bg-white h-100 d-flex flex-column justify-content-between">
+                        <div class="cat-icon mb-3">
+                            <span class="flaticon-education"></span>
                         </div>
                         <div class="cat-cap">
-                            <h5>
+                            <h5 class="fw-semibold">
                                 <a href="/Resources/Category/@category.Id" class="text-dark text-decoration-none">@category.Name</a>
                             </h5>
-                            <p>Bu kategorideki kaynakları keşfedin.</p>
+                            <p class="text-muted">Bu kategorideki kaynakları keşfedin.</p>
                             <a href="/Resources/Category/@category.Id" class="read-more1 text-primary fw-bold">Daha Fazla &gt;</a>
                         </div>
                     </div>
                 </div>
             }
         </div>
+
         <!-- Buton -->
         <div class="row">
             <div class="col-lg-12">
-                <div class="browse-btn2 text-center mt-50">
-                    <a href="/Resources" class="btn btn-primary">Tüm Kategorileri Gör</a>
+                <div class="text-center mt-4">
+                    <a href="/Category/Index" class="custom-btn-outline">Tüm Kategorileri Gör</a>
                 </div>
             </div>
         </div>
