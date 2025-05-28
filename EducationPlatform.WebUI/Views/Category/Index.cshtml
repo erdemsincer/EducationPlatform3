@@ -1,0 +1,99 @@
+﻿@model List<EducationPlatform.Dto.CategoryDto.ResultCategoryDto>
+@{
+    ViewData["Title"] = "Tüm Kategoriler";
+    Layout = "~/Views/UILayout/Layout.cshtml";
+}
+
+<style>
+    .category-card {
+        transition: all 0.3s ease;
+        border-radius: 20px;
+        background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+    }
+
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .category-icon {
+        font-size: 3rem;
+        color: #4e73df;
+        transition: color 0.3s ease;
+    }
+
+    .category-card:hover .category-icon {
+        color: #1cc88a;
+    }
+
+    .section-tittle h2 {
+        font-weight: bold;
+        font-size: 2.5rem;
+    }
+
+    .read-more1 {
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .read-more1:hover {
+        color: #1cc88a !important;
+        text-decoration: underline;
+    }
+</style>
+
+<div class="categories-area section-padding30">
+    <div class="container">
+        <!-- Başlık Alanı -->
+        <div class="row justify-content-sm-center">
+            <div class="col-xl-8 col-lg-9 col-md-10">
+                <div class="section-tittle text-center mb-5">
+                    <span class="text-uppercase text-primary">Kategori Rehberi</span>
+                    <h2 class="text-dark">Tüm Kategorilere Göz At</h2>
+                    <p class="text-muted">İlgi alanına uygun içeriklere ulaşmak için kategorileri keşfet!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kategori Kartları -->
+        <div class="row g-4">
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var category in Model)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="category-card shadow-sm p-4 h-100 d-flex flex-column text-center">
+                            <div class="category-icon mb-3">
+                                <span class="flaticon-education"></span>
+                            </div>
+                            <div class="cat-cap">
+                                <h5 class="fw-bold mb-2">
+                                    <a href="/Resources/Category/@category.Id" class="text-dark text-decoration-none">@category.Name</a>
+                                </h5>
+                                <p class="text-muted mb-3">Kategorideki ders, kaynak ve içerikleri keşfet.</p>
+                                <a href="/Resources/Category/@category.Id" class="read-more1 fw-bold text-primary">Daha Fazla &gt;</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12">
+                    <div class="alert alert-warning text-center">Hiç kategori bulunamadı.</div>
+                </div>
+            }
+        </div>
+
+        <!-- Tümünü Gör Butonu -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center mt-5">
+                    <a href="/Resources" class="btn btn-lg btn-primary rounded-pill px-5 py-3 shadow-sm">
+                        Tüm Kaynakları Gör
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
