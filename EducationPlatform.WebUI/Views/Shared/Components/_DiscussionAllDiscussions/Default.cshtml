@@ -1,5 +1,52 @@
 ﻿@model List<ResultDiscussionDto>
 
+<style>
+    .blog_item {
+        transition: all 0.3s ease-in-out;
+        border-radius: 16px;
+    }
+
+    .blog_item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .blog_item_date_noimage {
+        width: 80px;
+        margin-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog_item_date_noimage h3 {
+        font-size: 1.5rem;
+    }
+
+    .blog_details h3.blog-head {
+        transition: color 0.3s ease;
+    }
+
+    .blog_details h3.blog-head:hover {
+        color: #1cc88a;
+    }
+
+    .blog-info-link li {
+        margin-right: 15px;
+    }
+
+    .btn-outline-primary {
+        transition: all 0.3s ease;
+        border-width: 2px;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #0d6efd;
+        color: #fff;
+        border-color: #0d6efd;
+    }
+</style>
+
 <div class="col-lg-8 mb-5 mb-lg-0">
     <div class="blog_left_sidebar">
         @foreach (var item in Model)
@@ -30,14 +77,14 @@
 
                     <!-- Kullanıcı ve Yorum Sayısı -->
                     <ul class="blog-info-link list-inline text-muted small">
-                        <li class="list-inline-item"><i class="fa fa-user text-primary"></i> @item.UserFullName</li>
-                        <li class="list-inline-item"><i class="fa fa-comments text-secondary"></i> @item.ReplyCount Yorum</li>
+                        <li class="list-inline-item"><i class="fa fa-user text-primary me-1"></i>@item.UserFullName</li>
+                        <li class="list-inline-item"><i class="fa fa-comments text-secondary me-1"></i>@item.ReplyCount Yorum</li>
                     </ul>
 
                     <!-- Buton -->
                     <div class="text-end mt-3">
                         <a href="/Discussion/Detail/@item.Id" class="btn btn-outline-primary btn-sm fw-bold px-3 py-2 rounded-pill shadow-sm">
-                            <i class="fas fa-comments"></i> Tartışmayı Gör
+                            <i class="fas fa-comments me-1"></i> Tartışmayı Gör
                         </a>
                     </div>
                 </div>
